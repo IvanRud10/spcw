@@ -110,7 +110,7 @@ int ErrorChecking()
 	//Data.IdNum = 1;
 
 
-	//перевірка чи першим словом у програмі є program
+	//check if the first word in the program is program
 	if (Data.LexTable[0].type != LBegProg)
 	{
 		Err_num++;
@@ -153,7 +153,7 @@ int ErrorChecking()
 		fprintf(ef, "line %d: \t'variable' expected!\n", Data.LexTable[i].line);
 	}
 
-	//перевірка, чи  другим словом в програмі є var
+	//check if the second word in the program is variable
 	if (Data.LexTable[6].type != LVarType)
 	{
 		Err_num++;
@@ -162,7 +162,7 @@ int ErrorChecking()
 	if (Data.LexTable[6].type == LVarType)
 	{
 		i = 7;
-		if (Data.LexTable[i].type != LIdentifier)  	//перевірка, чи після var йдуть ідентифікатори
+		if (Data.LexTable[i].type != LIdentifier)  	//check whether variable is followed by identifiers
 		{
 			Err_num++;
 			fprintf(ef, "%d - line %d: \tIdentifier expected!\n", Err_num, Data.LexTable[i].line);
@@ -264,7 +264,7 @@ int ErrorChecking()
 	for (j = 0;; j++)
 	{
 		//int BraketErr;
-		if (Data.LexTable[j].type == LUnknown)        //Пошук невідомих слів(не ідентифікаторів)
+		if (Data.LexTable[j].type == LUnknown)        //Search for unknown words (not identifiers)
 		{
 			Err_num++;
 			fprintf(ef, "line %d: \tUnknown identifier!(%s)\n", Data.LexTable[j].line, Data.LexTable[j].name);
@@ -345,7 +345,7 @@ int ErrorChecking()
 			}
 
 		}
-		if (Data.LexTable[j].type == LWhile)				//перевірка for
+		if (Data.LexTable[j].type == LWhile)				//check for
 		{
 			int buf;
 			if (Data.LexTable[j + 1].type != LLBraket)
