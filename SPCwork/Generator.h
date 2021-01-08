@@ -530,14 +530,14 @@ void PrintCode(FILE* f)
 		{
 			int bufi;
 			bufi = i;
-			i = ConvertToPostfixForm(i + 1);//Ãåíåðàö³ÿ ïîñòô³êñíîãî âèðàçó			
+			i = ConvertToPostfixForm(i + 1);	//Generation of postfix expression			
 			if (i < 0)
 			{
 				i = -i;
 				puts("IE\n");
 				continue;
 			}
-			//Ãåíåðàö³ÿ àñåìáëåðíîãî êîäó ç ïîñòô³êñíîãî âèðàçó
+			//Generating assembly code from a postfix expression
 			GenASMCode("buf", f);
 			int lab =	startStack.Pop(&startStack.S);
 			fputs("\tmov eax, dword ptr buf\n", f);
@@ -565,14 +565,14 @@ void PrintCode(FILE* f)
 		{
 			int bufi;
 			bufi = i;
-			i = ConvertToPostfixForm(i + 1);//Ãåíåðàö³ÿ ïîñòô³êñíîãî âèðàçó			
+			i = ConvertToPostfixForm(i + 1);	//Generation of postfix expression		
 			if (i < 0)
 			{
 				i = -i;
 				puts("IE\n");
 				continue;
 			}
-			//Ãåíåðàö³ÿ àñåìáëåðíîãî êîäó ç ïîñòô³êñíîãî âèðàçó
+			//Generating assembly code from a postfix expression
 			GenASMCode(Data.LexTable[bufi - 1].name, f);
 		}
 	}
