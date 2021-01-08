@@ -19,7 +19,7 @@ void BeginCodeSegm(FILE* fout)
 	fprintf(fout, "finit\n");
 }
 
-void CheckPresent()			//Визначення присутності операторів put i get
+void CheckPresent()			//Determining the presence of put and get operators
 {
 	for (int i = 0; Data.LexTable[i].type != LEOF; ++i)
 	{
@@ -45,7 +45,7 @@ void CheckPresent()			//Визначення присутності операторів put i get
 	}
 }
 
-void PrintData(FILE* f)				//Друк сегмету даних
+void PrintData(FILE* f)				//Print a data segment
 {
 	fputs("\n;===User Data==============\n", f);
 	int i;
@@ -66,7 +66,7 @@ void PrintData(FILE* f)				//Друк сегмету даних
 	fputs("\tmsg1310\tdw\t13,10\n", f);
 	fputs("\tbuf\tdd\t0\n", f);
 
-	fputs("\tlb1\tdd\t?\n", f); //Змінні для обробки логічних операцій
+	fputs("\tlb1\tdd\t?\n", f); 	//Variables for processing logical operations
 	fputs("\tlb2\tdd\t?\n", f);
 }
 
@@ -354,12 +354,12 @@ bool Prioritet(TypeOfLex t, StackType s)
 	return r;
 }
 
-int ConvertToPostfixForm(int i) //Формує в масиві послідовність номерів лексем яка відповідає постфіксній формі
+int ConvertToPostfixForm(int i) //Forms in the array a sequence of token numbers that corresponds to the postfix form
 {
 	Stack.Init(&Stack.S);
 	int n, z;
 	n = 0;
-	for (; ((Data.LexTable[i + n].type != LSeparator)/* && (Data.LexTable[i + n].type != LThen)*/); ++n);		//Встановлення коректності та довжини вхідного масиву
+	for (; ((Data.LexTable[i + n].type != LSeparator)/* && (Data.LexTable[i + n].type != LThen)*/); ++n);		//Setting the correctness and length of the input array
 	int k;
 	k = i + n;
 	for (z = 0; i < k; ++i)
@@ -367,7 +367,7 @@ int ConvertToPostfixForm(int i) //Формує в масиві послідовність номерів лексем я
 		TypeOfLex in;
 		in = Data.LexTable[i].type;
 
-		if ((in == LIdentifier) || (in == LNumber) /*|| (in == LNot)*/)		//!!!!!!
+		if ((in == LIdentifier) || (in == LNumber) /*|| (in == LNot)*/)		
 		{
 			Data.bufExprPostfixForm[z] = i;
 			++z;
@@ -492,10 +492,10 @@ void PrintCode(FILE* f)
 {
 	int lab = 0;
 	int ifLabelIndex = 0;
-	Lexema l;								//Поточна лексема
+	Lexema l;								//Current token
 	int i = 0;
 
-	do									//Пошук початку коду
+	do									//Search for the beginning of the code
 	{
 		++i;
 	} while (Data.LexTable[i].type != LVarType);
@@ -530,14 +530,14 @@ void PrintCode(FILE* f)
 		{
 			int bufi;
 			bufi = i;
-			i = ConvertToPostfixForm(i + 1);//Генерація постфіксного виразу			
+			i = ConvertToPostfixForm(i + 1);//ГѓГҐГ­ГҐГ°Г Г¶ВіГї ГЇГ®Г±ГІГґВіГЄГ±Г­Г®ГЈГ® ГўГЁГ°Г Г§Гі			
 			if (i < 0)
 			{
 				i = -i;
 				puts("IE\n");
 				continue;
 			}
-			//Генерація асемблерного коду з постфіксного виразу
+			//ГѓГҐГ­ГҐГ°Г Г¶ВіГї Г Г±ГҐГ¬ГЎГ«ГҐГ°Г­Г®ГЈГ® ГЄГ®Г¤Гі Г§ ГЇГ®Г±ГІГґВіГЄГ±Г­Г®ГЈГ® ГўГЁГ°Г Г§Гі
 			GenASMCode("buf", f);
 			int lab =	startStack.Pop(&startStack.S);
 			fputs("\tmov eax, dword ptr buf\n", f);
@@ -565,14 +565,14 @@ void PrintCode(FILE* f)
 		{
 			int bufi;
 			bufi = i;
-			i = ConvertToPostfixForm(i + 1);//Генерація постфіксного виразу			
+			i = ConvertToPostfixForm(i + 1);//ГѓГҐГ­ГҐГ°Г Г¶ВіГї ГЇГ®Г±ГІГґВіГЄГ±Г­Г®ГЈГ® ГўГЁГ°Г Г§Гі			
 			if (i < 0)
 			{
 				i = -i;
 				puts("IE\n");
 				continue;
 			}
-			//Генерація асемблерного коду з постфіксного виразу
+			//ГѓГҐГ­ГҐГ°Г Г¶ВіГї Г Г±ГҐГ¬ГЎГ«ГҐГ°Г­Г®ГЈГ® ГЄГ®Г¤Гі Г§ ГЇГ®Г±ГІГґВіГЄГ±Г­Г®ГЈГ® ГўГЁГ°Г Г§Гі
 			GenASMCode(Data.LexTable[bufi - 1].name, f);
 		}
 	}
