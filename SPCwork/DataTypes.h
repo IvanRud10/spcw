@@ -17,11 +17,11 @@ enum TypeOfLex
 {
 	LBegProg,		// #
 	LProgram,		// program
-	LProgramName,	// ProgramName
+	LProgramName,		// ProgramName
 	LStart,			// start
 	LData,			// variable
 	LVarType,		// int16
-	LIdentifier,	// NameVar
+	LIdentifier,		// NameVar
 	LEnd,			// stop
 	
 	LScan,			// scan
@@ -70,13 +70,13 @@ typedef struct ID
 
 typedef struct L
 {
-	Lexema LexTable[MAX_LEXEMS];			//Таблиця лексем
-	int LexNum;								//
+	Lexema LexTable[MAX_LEXEMS];			//token table
+	int LexNum;							
 
-	Identificator IdTable[MAX_IDENT];		//Таблиця ідентифікаторів
-	int IdNum;								//
+	Identificator IdTable[MAX_IDENT];		//table of identifiers
+	int IdNum;							
 
-	bool IsPresentInput,					//Ознаки присутності операторів
+	bool IsPresentInput,				//Signs of the presence of operators
 	IsPresentOutput,
 	IsPresentMod,
 	IsPresentAnd,
@@ -92,7 +92,7 @@ typedef struct L
 	std::string InputFileName;
 	char OutputFileName[50];
 
-	int bufExprPostfixForm[MAX_BUF_SIZE];	//Буфер для виразу в постфіксній формі
+	int bufExprPostfixForm[MAX_BUF_SIZE];	//Buffer for expression in postfix form
 }DataType;
 
 typedef struct Stacks
@@ -164,10 +164,10 @@ public:
 	}
 }StackT;
 
-StackT Stack;						//Стек
+StackT Stack;						//Stack
 StackT startStack;
 StackT forStack;
 
-DataType Data;						//Структура-реєстр в якій зберігаються всі дані програми
+DataType Data;						//The structure-register in which all data of the program are stored
 
 FILE* InF, * OutF, * ErrorF;
