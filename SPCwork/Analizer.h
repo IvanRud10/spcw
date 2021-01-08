@@ -103,7 +103,7 @@ Lexema* GetNextLexem(FILE* f, int ii)
 			res->line = line;
 			break;
 		}
-		else if (ch == '-')				//відємне число
+		else if (ch == '-')				//a negative number
 		{
 			char c = getc(f);
 			if (isdigit(c))
@@ -133,7 +133,7 @@ Lexema* GetNextLexem(FILE* f, int ii)
 				break;
 			}
 		}
-		else if (isdigit(ch))				//додатнє число
+		else if (isdigit(ch))				//a positive number
 		{
 			int i = 1;
 			buf[0] = ch;
@@ -292,7 +292,7 @@ Lexema* GetNextLexem(FILE* f, int ii)
 			}
 		}
 
-		else if (isalpha(ch) || ch == '_')               //Зарезервоване слово або ідентифікатор
+		else if (isalpha(ch) || ch == '_')               //identifier
 		{
 			int i = 0;
 			buf[0] = ch;
@@ -311,7 +311,7 @@ Lexema* GetNextLexem(FILE* f, int ii)
 			buf[i] = '\0';
 			strncpy(res->name, buf, i);
 
-			//співставлення ідентифікаторів та зарезервованих слів
+			//comparison of identifiers
 			if (strcmp(buf, "program") == 0)
 			{
 				res->type = LProgram;
