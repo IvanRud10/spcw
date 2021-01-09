@@ -1,7 +1,7 @@
 #pragma once
 Lexema* GetNextLexem(FILE* f, int ii);	//get next tokens from input file
-void PrintLexemsInFile();	// print all tokens in file
-int AnalisisLexems(FILE* FIn); // analisis number of tokens
+void PrintLexemsInFile();		// print all tokens in file
+int AnalisisLexems(FILE* FIn); 		// analisis number of tokens
 // Return count of tokens
 int AnalisisLexems(FILE* FIn)
 {
